@@ -1,0 +1,85 @@
+form {
+    margin-left: auto;
+    display: flex;
+    max-width: 500px;
+    width: 100%;
+    align-items: center;
+    height: 35px;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.todo-save {
+    width: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #385499;
+    color: #fff;
+    border-color: transparent;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+
+    &:hover {
+        color: #ddd;
+    }
+
+    &:before {
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 17px;
+        color: #1c2a4b;
+        z-index: -1;
+        content: attr(placeholder) ' ';
+        font-size: 16px;
+        width: fit-content;
+    }
+}
+
+input[type='text'] {
+    font-size: 16px;
+    padding: 0 15px;
+    width: calc(100% - 100px);
+    height: 100%;
+    box-sizing: border-box;
+    border-color: antiquewhite;
+    background: transparent;
+    outline: none;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:placeholder-shown+button {
+        pointer-events: none;
+        background-color: red;
+    }
+
+    &:not(:placeholder-shown)+button {
+        background-color: #385499;
+
+        &:before {
+            top: -3px;
+            background-color: #fff;
+            z-index: +1;
+            left: calc(100% - 196px);
+        }
+    }
+
+    &::placeholder {
+        color: transparent;
+    }
+
+    &:focus~button::before {
+        top: -3px;
+        background-color: #fff;
+        z-index: +1;
+        transition: 0.5s;
+    }
+}

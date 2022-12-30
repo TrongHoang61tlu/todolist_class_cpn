@@ -1,0 +1,178 @@
+.todo {
+    &-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #edf2f7;
+        padding: 15px 15px;
+        cursor: default;
+        text-align: left;
+
+        &:hover {
+            transform: scale(1.03, 1.02);
+            position: relative;
+            box-shadow: 0 4px 6px #ddd;
+            border-width: 0;
+            background-color: #fff;
+            transition: 0.3s;
+            border-color: #edf2f7;
+        }
+
+        div {
+            &:not(:last-child) {}
+        }
+    }
+
+    &-content {
+        width: min(500px, 50%);
+    }
+
+    &-status {
+        width: fit-content;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        display: block;
+        height: 30px;
+        padding: 0 20px;
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        color: #fff;
+
+        &.todo {
+            background-color: #8d65c5;
+        }
+
+        &.process {
+            background-color: #ffc107;
+        }
+
+        &.completed {
+            background-color: #4fa49b;
+        }
+    }
+
+    &-action {
+        display: flex;
+        align-items: center;
+
+        button,
+        a {
+            display: block;
+            height: 30px;
+            padding: 0 20px;
+            border-radius: 20px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+
+    &-edit {
+        border: 2px solid #0dcaf030;
+        color: #0dcaf0;
+
+        &:hover {
+            border-color: #0dcaf0;
+        }
+    }
+
+    &-delete {
+        border: 2px solid #ea4a3430;
+        color: #ea4a34;
+
+        &:hover {
+            border-color: #ea4a34;
+        }
+    }
+}
+
+.edit-tag {
+    height: 31px;
+    padding: 0 15px;
+    // height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #ff4136;
+    color: #fff;
+    border-color: transparent;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.todo-form {
+    display: flex;
+    padding: 0 15px;
+}
+
+.status-context-menu {
+    position: fixed;
+    z-index: 1;
+    width: 200px;
+    overflow: hidden;
+    max-height: 0;
+
+    & button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        width: 100%;
+        height: 50px;
+        cursor: pointer;
+        margin: 0;
+    }
+
+    &.visible {
+        max-height: 1000px;
+        transition: max-height 0.5s ease-in;
+        z-index: 999999;
+    }
+
+    &.hidden {
+        max-height: 0;
+        z-index: -1;
+        transition: all 0.5s ease-out;
+        transition-property: max-height, z-index;
+        // transition: max-height 0.5s ease-out, z-index 0.5 ease-out;
+    }
+}
+
+.status-context-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #33333333;
+    opacity: 0;
+    z-index: -99999;
+
+    &.hidden {
+        animation-name: statuscontextcoverhidden;
+        animation-duration: 1s;
+        animation-timing-function: ease-in;
+        opacity: 0;
+    }
+
+    &.visible {
+        z-index: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes statuscontextcoverhidden {
+    from {
+        opacity: 1;
+        z-index: 99999;
+    }
+
+    to {
+        z-index: 0;
+        opacity: 0;
+    }
+}
